@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div
+      class="bg-gradient-to-br from-[#f7c084] via-[#f4736d] to-[#6092e6] w-full h-screen fixed"
+    >
+      <div class="flex justify-center items-center max-w-screen-xl mx-auto">
+        <div class="my-10 bg-white w-full rounded p-10 flex-col space-y-4">
+          <!--HEADING-->
+          <div class="w-full text-center">
+            <h2
+              class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#f7c084] via-[#f4736d] to-[#6092e6] inline w-fit"
+            >
+              FLAMES
+            </h2>
+          </div>
+          <form action="" class="mx-10">
+            <div
+              class="px-4 py-0.5 bg-gradient-to-br from-[#f7c084] via-[#f4736d] to-[#6092e6] rounded-full mt-4"
+            >
+              <input
+                type="text"
+                name="nameOne"
+                id="nameOne"
+                placeholder="Enter Name"
+                class="pl-8 p-4 rounded-full focus:outline-none w-full"
+              />
+            </div>
+            <p id="errorOne" class="ml-4"></p>
+            <div
+              class="px-4 py-0.5 bg-gradient-to-br from-[#f7c084] via-[#f4736d] to-[#6092e6] rounded-full mt-4"
+            >
+              <input
+                type="text"
+                name="nameTwo"
+                id="nameTwo"
+                placeholder="Enter Name"
+                class="pl-8 p-4 rounded-full focus:outline-none w-full"
+              />
+            </div>
+            <p id="errorTwo" class="ml-4"></p>
+            <button
+              type="submit"
+              id="submit"
+              class="my-6 bg-gradient-to-br from-[#f7c084] via-[#f4736d] to-[#6092e6] px-6 py-2 rounded-full inline"
+            >
+              <span class="text-lg text-white">Let's Go</span>
+            </button>
+          </form>
+          <!--ANSWER-->
+          <div id="result" class="max-h-64 h-20"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $("#submit").click(function (e) {
+        e.preventDefault();
+        let name1 = $("#nameOne").val().toLowerCase();
+        let name2 = $("#nameTwo").val().toLowerCase();
+        let isError;
+
+        //validation
+        if (!name1.trim()) {
+          $("#errorOne").html("Please Enter Name");
+          isError = true;
+        }
+        if (!name2.trim()) {
+          $("#errorTwo").text("Please Enter Name");
+          isError = true;
+        }
+        if (isError) return;
+
+        let freq1 = new Array(26).fill(0);
+        for (i in name1) {
+          let index = name1.charCodeAt(i) - 97;
+          freq1[index] = freq1[index] + 1;
+        }
+
+        console.log(freq1);
+        for (i in name2) {
+          let index = name2.charCodeAt(i) - 97;
+          let val = Math.abs(freq1[index] - 1);
+          freq1[index] = val;
+          console.log(index, "=", val);
+        }
+        let num = 0;
+        console.log(freq1);
+        for (i of freq1) num += i;
+        console.log("number ", num);
+      });
+    </script>
+  </body>
+</html>
